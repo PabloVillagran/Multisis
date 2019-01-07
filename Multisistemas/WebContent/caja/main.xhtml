@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<title>Multisis</title>
+<h:outputStylesheet name="css/template.css"/>
+</h:head>
+<h:body styleClass="menu-active">
+	<div class="main-header">
+		<h:form id="homeHeader">
+			<p:commandLink id="homeLink" action="#{mainBean.redirect(null, null)}" ajax="false" styleClass="link-home">
+				LOGO
+			</p:commandLink>
+		</h:form>
+		<p:commandLink id="toggler" styleClass="menu-toggler" global="false">
+			<i class="fa fa-bars"></i>
+		</p:commandLink>
+		<p:commandLink id="logOut" styleClass="header-logout" actionListener="#{mainBean.exit()}" global="false">
+			<i class="fa fa-power-off"></i>
+		</p:commandLink>
+		<!-- 
+		 <p:commandLink value="#{mainBean.so.usuario}" styleClass="header-user" global="false"/>
+		 -->
+	</div>
+	
+	<div class="container">
+		<p:panel id="slide-menu" styleClass="main-menu-panel">
+			<h:form id="mainMenuForm">
+				<p:menu model="#{mainBean.menu}" styleClass="main-menu">
+				</p:menu>
+			</h:form>
+		</p:panel>
+		
+		<div class="content">
+			<div>
+				<!-- 
+				<h:form class="default-form">
+					<p:panelGrid columns="2">
+						<f:facet styleClass="header" name="header">Formulario 1</f:facet>
+						<p:outputLabel styleClass="outLabel" value="Etiqueta1"/>
+						<p:inputText/>
+						<p:outputLabel styleClass="outLabel" value="pass"/>
+						<p:inputText/>
+						<p:commandButton styleClass="btn bCancelar" value="Cancelar"/>
+						<p:commandButton styleClass="btn bEditar" value="Editar"/>
+						<p:commandButton styleClass="btn bEliminar" value="Eliminar"/>
+						<p:commandButton styleClass="btn bAceptar" value="Aceptar"/>
+					</p:panelGrid>
+				</h:form>
+				 -->
+				
+				<ui:insert name="content">
+					<ui:include src="#{(mainBean.dirxhtml != null) ? mainBean.dirxhtml:''}"/>
+				</ui:insert>
+			</div>
+			
+		</div>
+	</div>
+
+	<ui:insert name="progressBar">
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()"/>
+			
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="img/progress_bar.gif"/>
+		</p:dialog>
+			
+		<h:form>
+			<p:idleMonitor timeout="1170000">
+		        <p:ajax event="idle" onstart="PF('expired').show()" listener="#{mainBean.exit}"/>
+	    	</p:idleMonitor>
+		</h:form>
+		<p:dialog widgetVar="expired" modal="true" closable="false" resizable="false" header="Su sesión ha caducado." draggable="false" closeOnEscape="false">
+			Por favor vuelva a iniciar sesión.
+			<br/>
+			<h:form>
+			<p:commandButton style="float:right; margin:5px;" styleClass="btn bCancelar" value="Regresar a Login" action="#{mainBean.redirect(null, null)}" ajax="false" />
+			</h:form>
+		</p:dialog>
+	</ui:insert>
+	
+	<span id="desc" style="display:none;">#{mainBean.descripcion}</span>
+	<h:outputScript name="js/instrucciones.js"/>	
+</h:body>
+</html>

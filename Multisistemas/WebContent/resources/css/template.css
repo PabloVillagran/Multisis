@@ -1,0 +1,428 @@
+@charset "ISO-8859-1";
+
+body{
+	widht:100%;
+	height:100%;
+	margin:0;
+	padding:0px;
+}
+
+.main-header{
+	height:50px;
+	position:fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	background-color:#dd4b39;
+}
+
+.main-header a{
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	padding:0 15px;
+	overflow:hidden;
+	line-height: 50px;
+	display:block;
+}
+
+.main-header a:hover{
+	background-color:#d73925;
+}
+
+.link-home{
+	float:left;
+	width:200px;
+	background-color:#d73925;
+}
+
+.menu-toggler{
+	float:left;
+	height:100%;
+	padding:14px !important;
+}
+
+.header-logout{
+	float:right;
+	height:100%;
+	padding:14px !important;
+}
+
+.header-user{
+	float:right;
+	font-weight: normal !important;
+}
+
+.header-user.ui-selectonemenu{
+	margin:9px;
+}
+
+.main-menu-panel{
+	width: 230px !important;
+	height: 100%;
+	border: none;
+	padding:0px !important;
+	display:inline-block;
+	
+	/*OVERRIDE PF PROPERTIES*/
+	position:fixed !important;
+	background-color: #222d32 !important;
+	-webkit-background-clip: unset !important;
+	-moz-background-clip: unset !important;
+	background-clip: unset !important;
+	-webkit-border-radius: unset !important;
+	-moz-border-radius: unset !important;
+	border-radius: unset !important;
+}
+
+.main-menu{
+	background-color:#222d32 !important;
+	border: none !important;
+	color:#b8c7ce !important; /*TODO REVISAR.*/
+	left:0px !important;
+	margin: 0px !important;
+	padding: 0px !important;
+	position:absolute !important;
+	width:230px !important;
+
+	-webkit-background-clip: unset !important;
+	-moz-background-clip: unset !important;
+	background-clip: unset !important;
+	-webkit-border-radius: unset !important;
+	-moz-border-radius: unset !important;
+	border-radius: unset !important;
+}
+
+.main-menu li a{
+	color: #b8c7ce !important;
+	border-left:3px solid transparent;
+	width:227px;
+	padding: 0.32em 0px !important;
+}
+
+.main-menu > ul > li > .ui-state-hover{
+	background-color:#1e282c !important;
+	color:#fff !important;
+	background-position: 0px;
+	
+	border-right: 15px solid #31b0d5 !important;
+	margin-left: -10px;
+	padding-left: 7px !important;
+	
+	/*Override PF properties*/
+	background-image: none !important;
+	background-image: none !important;
+	background-image: none !important;
+	background-image: none !important;
+	background-image: none !important;
+	background-repeat: inherit !important;
+}
+
+.main-menu > ul > li > .active{
+	background-color:#1e282c !important;
+	color:#fff !important;
+	background-position: 0px;
+	
+	border-right: 15px solid #dd4b39 !important;
+	margin-left: -10px;
+	padding-left: 7px !important;
+	
+	cursor:default !important;
+	
+	/*Override PF properties*/
+	background-image: none !important;
+	background-image: none !important;
+	background-image: none !important;
+	background-image: none !important;
+	background-image: none !important;
+	background-repeat: inherit !important;
+}
+
+.container{
+	margin-top:50px;
+}
+
+/* template formularios */
+.default-modal> .ui-dialog-content.ui-widget-content{
+	padding: 0px 0px 5px 0px !important;
+}
+
+.exit-modal{
+	float: right;
+	margin: 0px;
+	width: 20px;
+	height: 20px;
+}
+
+.exit-modal>span{
+	padding:0px !important;
+	margin-top:-9px !important;
+	margin-left:-11px !important;
+}
+
+/* /template formularios genericos */
+.default-form{
+	display:inline-block;
+	font-size:14px;
+	
+	border-top: 3px solid #00c0ef;
+	border-radius: 3px !important;
+	
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.default-form > .ui-panelgrid{
+	border-collapse: unset;
+}
+
+.default-form > table > tbody > tr, .default-form > table > tbody > tr > td{
+	border: none !important;/*Override default PF props*/
+}
+
+.default-form > table > tbody > tr > td:first-child {
+	padding: 10px 15px !important;
+    text-align: right;
+}
+
+.default-form > table{
+	border-radius: 3px;
+	border: 1px solid transparent;
+	background: #fcfeff;
+}
+
+.default-form > table > thead{
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.default-form > table > thead > tr {	
+	/*Override default PF props */
+	border: none !important;
+	background: none !important;
+}
+
+.default-form > table > thead > tr > td {
+    padding: 10px !important;
+	font-weight: normal;
+	font-size: 18px;
+	text-align: left;
+	border: none !important;
+	background-color: transparent !important;
+}
+
+.default-form .outLabel{
+	text-align:right;
+	font-weight:700;
+}
+
+.fEditar{
+	border-top: 3px solid #00a65a !important;
+}
+
+.fEliminar{
+	border-top: 3px solid #d73925 !important;
+}
+
+.fAceptar{
+	border-top: 3px solid #00c0ef !important;
+}
+
+.default-headerLabel {
+    display: block;
+    width: 100%;
+    text-align: left !important;
+    border-bottom: 3px solid #00c0ef;
+}
+/* /template formularios genericos */
+/* template formularios tabla */
+.table-form {
+	border-top: 3px solid rgba(0,0,0,0.4);
+	border-radius: 3px;
+	font-size: 14px;
+	
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+	background-color: #fff;
+}
+
+.table-form > div > .ui-datatable-header {
+    text-align: left !important;
+    font-size: 18px;
+    font-weight: normal !important;
+    line-height: 1;
+    padding:10px;
+    background-color: transparent;
+}
+
+.table-form table {
+    margin-top: 10px !important;
+}
+
+.table-form th{
+	background-image:none !important;	
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+	background-color: #fff !important;
+}
+
+.table-form .ui-column-title {
+    float: left;
+}
+
+.table-form .ui-sortable-column-icon {
+    float: right;
+}
+/* /template formularios tabla */
+/* fin tamplate formularios */
+
+/* template botones */
+.btn{
+	background-image: none !important;
+	font-size: 14px !important;
+	font-weight: 400 !important;
+	text-shadow: none !important;
+	white-space: nowrap;
+	border-radius:3px !important;
+	border: 1px solid transparent !important;
+}
+
+.bCancelar{
+	background-color: #f4f4f4 !important;
+	border-color: #ddd !important;
+	color: #444 !important;
+}
+
+.bCancelar:hover{
+	background-color: #e7e7e7 !important;
+	border-color: #adadad !important;
+	color: #333 !important;
+}
+
+.bEditar{
+	background-color: #00a65a !important;
+	border-color: #008d4c !important;
+	color: #fff !important;
+}
+
+.bEditar:hover{
+	background-color: #008d4c !important;
+	border-color: #398439 !important;
+	color: #fff !important;
+}
+
+.bEliminar{
+	background-color: #dd4b39 !important;
+	border-color: #d73925 !important;
+	color: #fff !important;
+}
+
+.bEliminar:hover{
+	background-color: #d73925 !important;
+	border-color: #ac2925 !important;
+	color: #fff !important;
+}
+
+.bAceptar{
+	background-color: #00c0ef !important;
+	border-color: #00acd6 !important;
+	color: #fff !important;
+}
+
+.bAceptar:hover{
+	background-color: #00acd6 !important;
+	border-color: #269abc !important;
+	color: #fff !important;
+}
+/* /template botones */
+
+/*src = https://codepen.io/jasonhowmans/pen/dykhL*/
+.main-menu-panel#slide-menu {
+  position: fixed;
+  top: 50px;
+  left: -230px;
+  bottom: 0;
+  display: block;
+  float: left;
+  width: 100%;
+  max-width: 284px;
+  height: 100%;
+  -moz-transition: all 300ms;
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+  border:none !important;
+}
+
+#slide-menu .ui-panel-content{
+	padding: 0px !important;
+}
+
+body.menu-active .main-menu-panel#slide-menu {
+  left: 0px;
+}
+
+body.menu-active .main-menu-panel#slide-menu ul {
+  left: 0px;
+  opacity: 1;
+}
+
+/*Content*/
+div.content {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  background: #ecf0f5;
+  border-radius: 0;
+  /*
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-box-shadow: -3px 0 6px #4a5562;
+  -webkit-box-shadow: -3px 0 6px #4a5562;
+  box-shadow: -3px 0 6px #4a5562;
+  */
+  -moz-transition: all 300ms;
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+}
+
+body.menu-active div.container div.content {
+  left: 230px;
+  /*border-radius: 7px 0 0 7px;*/
+}
+
+body.menu-active div.container div.content .menu-trigger {
+  left: 230px;
+}
+
+.content > div{
+	padding:10px;
+	transition: 300ms all;
+	margin-bottom: 75%;
+}
+/*END SRC = https://codepen.io/jasonhowmans/pen/dykhL*/
+
+.warning-messages > div {
+    margin: 0px;
+    color: #fff;
+    background-color: #f39c12 !important;
+    border: none;
+    border-radius: 0px;
+}
+
+.ui-datatable-scrollable-theadclone{
+	visibility:collapse;
+}
+
+.ui-fileupload-filename{
+	display: block;
+	text-align: right;
+}
+
+.ui-column-customfilter > .ui-calendar > input{
+	width:95%;
+}
