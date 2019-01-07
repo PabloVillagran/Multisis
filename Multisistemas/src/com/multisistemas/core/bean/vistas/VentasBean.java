@@ -8,7 +8,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import com.multisistemas.dao.entity.Cliente;
-import com.multisistemas.dao.entity.DetalleFactura;
+import com.multisistemas.dao.entity.DetalleVenta;
 import com.multisistemas.dao.entity.Producto;
 
 @Named
@@ -19,7 +19,7 @@ public class VentasBean implements Serializable{
 
 	private double total;
 	private Cliente datosCliente;
-	private List<DetalleFactura> detalleFactura;
+	private List<DetalleVenta> detalleFactura;
 	
 	private List<Producto> productosDisponibles;
 	
@@ -44,11 +44,11 @@ public class VentasBean implements Serializable{
 		this.datosCliente = datosCliente;
 	}
 
-	public List<DetalleFactura> getDetalleFactura() {
+	public List<DetalleVenta> getDetalleFactura() {
 		return detalleFactura;
 	}
 
-	public void setDetalleFactura(List<DetalleFactura> detalleFactura) {
+	public void setDetalleFactura(List<DetalleVenta> detalleFactura) {
 		this.detalleFactura = detalleFactura;
 	}
 
