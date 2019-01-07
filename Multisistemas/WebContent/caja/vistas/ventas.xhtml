@@ -1,1 +1,67 @@
-HOLA MUNDO
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <section class="content-header">
+    	<H1>Venta nueva</H1>
+    </section>
+    <h:form>
+    	<div>
+    		<p:panelGrid>
+    			<f:facet name="header">Datos del cliente</f:facet>
+    			<p:row>
+    				<p:column>N.I.T.</p:column>
+    				<p:column>
+    					<p:inputText/>
+    				</p:column>
+    				<p:column>Fecha</p:column>
+    				<p:column>
+    					01/01/2019
+    				</p:column>
+    			</p:row>
+    			<p:row>
+    				<p:column>
+    					Nombre
+    				</p:column>
+    				<p:column colspan="3">
+    					<p:inputText/>
+    				</p:column>
+    			</p:row>
+    			<p:row>
+    				<p:column>
+    					Dirección
+    				</p:column>
+    				<p:column colspan="3">
+    					<p:inputText/>
+    				</p:column>
+    			</p:row>
+    		</p:panelGrid>
+    	</div>
+    	<div>
+    		#{ventasBean.total}
+    	</div>
+    	<p:dataTable>
+    		<p:column headerText="Código">
+    		
+    		</p:column>
+    		<p:column headerText="Descripción">
+    		
+    		</p:column>
+    		<p:column headerText="Cantidad">
+    		
+    		</p:column>
+    		<p:column headerText="Precio unitario">
+    		
+    		</p:column>
+    		<p:column headerText="Subtotal">
+    		
+    		</p:column>
+    		<p:column>
+    			<p:commandButton value="X"/>
+    		</p:column>
+    	</p:dataTable>
+    	<p:commandButton value="Confirmar compra"/>
+    </h:form>
+</h:body>
+</html>

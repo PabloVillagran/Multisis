@@ -29,7 +29,6 @@ public class MainBean implements Serializable{
 	
 	@PostConstruct
 	public void init() {
-		System.out.println("postConstruct");
 		setDescripcion("main");
 		populateMenu();
 	}
