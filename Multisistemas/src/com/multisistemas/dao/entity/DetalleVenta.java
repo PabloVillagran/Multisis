@@ -20,6 +20,9 @@ public class DetalleVenta {
 	private Date fechaIngreso;//	FECHA_INGRESO	DATE
 	private String usuarioModifico;//	USUARIO_MODIFICO	VARCHAR2(30 BYTE)
 	private Date fechaModifico;//	FECHA_MODIFICO	DATE
+	
+	//agregados
+	private String descripcionProducto;
 	public double getValor() {
 		return valor;
 	}
@@ -86,4 +89,11 @@ public class DetalleVenta {
 	public void setFechaModifico(Date fechaModifico) {
 		this.fechaModifico = fechaModifico;
 	}
+	public String getDescripcionProducto() {
+		return descripcionProducto;
+	}
+	public void setDescripcionProducto(String descripcionProducto) {
+		this.descripcionProducto = descripcionProducto;
+	}
+	
 }

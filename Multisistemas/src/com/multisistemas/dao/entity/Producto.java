@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Producto {
 
-	private long idProducto;//	ID_PRODUCTO	NUMBER
+	private Long idProducto;//	ID_PRODUCTO	NUMBER
 	private String descripcion;//	DESCRIPCION	VARCHAR2(50 BYTE)
 	private String descripcionAlternativa;//	DESCRIPCION_ALTERNATIVA	VARCHAR2(30 BYTE)
 	private long fkIdProducto;//	FK_ID_PRODUCTO	NUMBER
@@ -17,8 +17,8 @@ public class Producto {
 	private long idCategorizacion;//	ID_CATEGORIZACION	NUMBER
 	private long idEstatusProducto;//	ID_ESTATUS_PRODUCTO	NUMBER
 	private long existencia;//	EXISTENCIA	NUMBER
-	private long precioCompra;//	PRECIO_COMPRA	NUMBER(10,2)
-	private long precioVenta;//	PRECIO_VENTA	NUMBER(10,2)
+	private double precioCompra;//	PRECIO_COMPRA	NUMBER(10,2)
+	private double precioVenta;//	PRECIO_VENTA	NUMBER(10,2)
 	private byte[] imagen;//	IMAGEN	LONG RAW
 	private String serie;//	SERIE	VARCHAR2(50 BYTE)
 	private String codigoBarras;//	CODIGO_BARRAS	VARCHAR2(30 BYTE)
@@ -28,6 +28,7 @@ public class Producto {
 	private Date usuarioModifico;//	USUARIO_MODIFICO	VARCHAR2(30 BYTE)
 	private Date fechaModifico;//	FECHA_MODIFICO	DATE
 	private long idUnidadMedida;//	ID_UNIDAD_MEDIDA	NUMBER
+	
 	public long getIdProducto() {
 		return idProducto;
 	}
@@ -76,16 +77,16 @@ public class Producto {
 	public void setExistencia(long existencia) {
 		this.existencia = existencia;
 	}
-	public long getPrecioCompra() {
+	public double getPrecioCompra() {
 		return precioCompra;
 	}
-	public void setPrecioCompra(long precioCompra) {
+	public void setPrecioCompra(double precioCompra) {
 		this.precioCompra = precioCompra;
 	}
-	public long getPrecioVenta() {
+	public double getPrecioVenta() {
 		return precioVenta;
 	}
-	public void setPrecioVenta(long precioVenta) {
+	public void setPrecioVenta(double precioVenta) {
 		this.precioVenta = precioVenta;
 	}
 	public byte[] getImagen() {
@@ -143,4 +144,14 @@ public class Producto {
 		this.idUnidadMedida = idUnidadMedida;
 	}
 	
+	public boolean equals(Producto producto) {
+	    return this.idProducto == producto.idProducto;
+	}
+
+	@Override
+	public int hashCode() {
+	    return (idProducto != null) 
+	         ? (getClass().hashCode() + idProducto.hashCode())
+	         : super.hashCode();
+	}
 }

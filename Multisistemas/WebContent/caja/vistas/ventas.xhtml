@@ -6,9 +6,9 @@
     <section class="content-header">
     	<H1>Venta nueva</H1>
     </section>
-    <h:form>
+    <h:form id="factura">
     	<div>
-    		<p:panelGrid>
+    		<p:panelGrid id="cliente">
     			<f:facet name="header">Datos del cliente</f:facet>
     			<p:row>
     				<p:column>N.I.T.</p:column>
@@ -39,26 +39,45 @@
     		</p:panelGrid>
     	</div>
     	<div>
+    		<span>Total</span>
     		#{ventasBean.total}
     	</div>
-    	<p:dataTable>
+    	<p:dataTable id="detalles" value="#{ventasBean.detalleFactura}" var="detalle"
+    		rowIndexVar="position">
     		<p:column headerText="Código">
-    		
+    			<p:autoComplete id="c" value="#{detalle.idProducto}" 
+    				completeMethod="#{ventasBean.completeCodigo}" onfocus="if(this.value==0)this.value = '';">
+    				<p:ajax event="itemSelect" listener="#{ventasBean.completeById(position)}" update="factura-detalles"
+    					oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position}-q_input');});"/>
+    			</p:autoComplete>
     		</p:column>
     		<p:column headerText="Descripción">
-    		
+    			<p:autoComplete value="#{detalle.descripcionProducto}" 
+    				completeMethod="#{ventasBean.completeDesc}" onfocus="this.value = '';">
+    				<p:ajax event="itemSelect" listener="#{ventasBean.completeByDesc(position)}" update="factura-detalles"
+    					oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position}-q_input');});"/>
+    			</p:autoComplete>
     		</p:column>
     		<p:column headerText="Cantidad">
-    		
+    			<p:inputNumber id="q" value="#{detalle.cantidad}" decimalPlaces="0" emptyValue="0" onfocus="this.value = '';">
+    				<p:ajax event="blur" listener="#{ventasBean.calcular(position)}" update="factura"
+    					oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position+1}-c_input');});"/>
+    			</p:inputNumber>
     		</p:column>
     		<p:column headerText="Precio unitario">
-    		
+    			<p:outputLabel value="#{detalle.precioUnitario}">
+    				<f:convertNumber pattern="#0.00"/>
+    			</p:outputLabel>
     		</p:column>
     		<p:column headerText="Subtotal">
-    		
+    			<p:outputLabel value="#{detalle.valor}">
+    				<f:convertNumber pattern="#0.00"/>
+    			</p:outputLabel>
     		</p:column>
     		<p:column>
-    			<p:commandButton value="X"/>
+    			<p:commandButton icon="fa fa-fw fa-close" 
+    				actionListener="#{ventasBean.remover(position)}" update="factura"
+    				oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position}-c_input');});"/>
     		</p:column>
     	</p:dataTable>
     	<p:commandButton value="Confirmar compra"/>

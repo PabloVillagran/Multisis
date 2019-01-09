@@ -13,6 +13,8 @@ public class DbConnection {
 	public java.sql.Connection con;
 	public PreparedStatement stm;
 	public ResultSet rst;
+	public String sql;
+	protected int stmPos;
 	
 	public void connect() throws SQLException {
 		try {
@@ -36,6 +38,7 @@ public class DbConnection {
 	}
 
 	public PreparedStatement prepareStatement(String sql) throws SQLException {
+		stmPos = 1;
 		return (con!=null)?con.prepareStatement(sql):null;
 	}
 
