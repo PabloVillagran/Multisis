@@ -7,13 +7,22 @@ body{
 	padding:0px;
 }
 
+form{
+	margin:0px;
+}
+
+h1, h2, h3, h4, h5, h6, h7{
+	font-family: 'Source Sans Pro',sans-serif;
+	font-weight: normal;
+}
+
 .main-header{
 	height:50px;
 	position:fixed;
 	top:0px;
 	left:0px;
 	right:0px;
-	background-color:#dd4b39;
+	background-color:#00a65a;
 }
 
 .main-header a{
@@ -30,13 +39,13 @@ body{
 }
 
 .main-header a:hover{
-	background-color:#d73925;
+	background-color:#008d4c;
 }
 
 .link-home{
 	float:left;
 	width:200px;
-	background-color:#d73925;
+	background-color:#008d4c;
 }
 
 .menu-toggler{
@@ -108,7 +117,7 @@ body{
 	color:#fff !important;
 	background-position: 0px;
 	
-	border-right: 15px solid #31b0d5 !important;
+	border-right: 15px solid #00a65a !important;
 	margin-left: -10px;
 	padding-left: 7px !important;
 	
@@ -126,7 +135,7 @@ body{
 	color:#fff !important;
 	background-position: 0px;
 	
-	border-right: 15px solid #dd4b39 !important;
+	border-right: 15px solid #00a65a !important;
 	margin-left: -10px;
 	padding-left: 7px !important;
 	
@@ -164,6 +173,11 @@ body{
 }
 
 /* /template formularios genericos */
+div .default-form {
+    background-color: #ffffff;
+    margin:15px 15px 0px 0px;
+}
+
 .default-form{
 	display:inline-block;
 	font-size:14px;
@@ -235,6 +249,13 @@ body{
     text-align: left !important;
     border-bottom: 3px solid #00c0ef;
 }
+
+.header-span {
+    display: inline-block;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 18px;
+    padding: 10px;
+}
 /* /template formularios genericos */
 /* template formularios tabla */
 .table-form {
@@ -244,6 +265,7 @@ body{
 	
 	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 	background-color: #fff;
+	padding-bottom:5px;
 }
 
 .table-form > div > .ui-datatable-header {
@@ -274,6 +296,7 @@ body{
 .table-form .ui-sortable-column-icon {
     float: right;
 }
+
 /* /template formularios tabla */
 /* fin tamplate formularios */
 
@@ -286,6 +309,10 @@ body{
 	white-space: nowrap;
 	border-radius:3px !important;
 	border: 1px solid transparent !important;
+}
+
+.btnBig{
+	font-size:1.3em !important;
 }
 
 .bCancelar{
@@ -400,7 +427,7 @@ body.menu-active div.container div.content .menu-trigger {
 }
 
 .content > div{
-	padding:10px;
+	padding:15px;
 	transition: 300ms all;
 	margin-bottom: 75%;
 }
@@ -425,4 +452,34 @@ body.menu-active div.container div.content .menu-trigger {
 
 .ui-column-customfilter > .ui-calendar > input{
 	width:95%;
+}
+
+.total-venta {
+    padding: 10px;
+    font-size: 5em;
+    text-align: right;
+    position: relative;
+    display: block;
+}
+
+.default-form.display-total{
+	position:relative;
+	min-width: 300px;
+}
+
+.display-cliente{
+	position:relative;
+}
+
+.ui-datatable.borderless thead th,
+.ui-datatable.borderless tbody,
+.ui-datatable.borderless tbody tr,
+.ui-datatable.borderless tbody td {
+    border-style: none;
+}
+
+.ui-datatable-footer.ui-widget-header.ui-corner-bottom {
+    text-align: right;
+    background-color: #ffffff;
+    border: none;
 }

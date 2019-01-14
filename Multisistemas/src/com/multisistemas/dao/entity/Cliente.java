@@ -25,6 +25,7 @@ public class Cliente {
 	private Date fechaModifico;//	FECHA_MODIFICO	DATE
 	private long idARPU;//	ID_ARPU	NUMBER
 	private long idGeografia;//	ID_GEOGRAFIA	NUMBER
+	
 	public long getIdCliente() {
 		return idCliente;
 	}

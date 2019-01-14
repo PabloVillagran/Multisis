@@ -17,7 +17,7 @@ public class ProductoService extends DbConnection{
 		try {
 			this.connect();
 			stm = prepareStatement(sql);
-			stm.setString(stmPos++, codigo+"%");
+			stm.setString(p++, codigo+"%");
 			rst = executeQuery();
 			while(rst.next()){
 				Producto producto = new Producto();
@@ -43,7 +43,7 @@ public class ProductoService extends DbConnection{
 		try {
 			this.connect();
 			stm = prepareStatement(sql);
-			stm.setString(stmPos++, desc+"%");
+			stm.setString(p++, desc+"%");
 			rst = executeQuery();
 			while(rst.next()){
 				Producto producto = new Producto();
@@ -69,7 +69,7 @@ public class ProductoService extends DbConnection{
 		try {
 			this.connect();
 			stm = prepareStatement(sql);
-			stm.setLong(stmPos++, value);
+			stm.setLong(p++, value);
 			rst = executeQuery();
 			while(rst.next()){
 				producto = new Producto();
@@ -94,7 +94,7 @@ public class ProductoService extends DbConnection{
 		try {
 			this.connect();
 			stm = prepareStatement(sql);
-			stm.setString(stmPos++, codigo+"%");
+			stm.setString(p++, codigo+"%");
 			rst = executeQuery();
 			while(rst.next()){
 				lista.add(String.valueOf(rst.getLong("ID_PRODUCTO")));
@@ -115,7 +115,7 @@ public class ProductoService extends DbConnection{
 		try {
 			this.connect();
 			stm = prepareStatement(sql);
-			stm.setString(stmPos++, desc.toUpperCase()+"%");
+			stm.setString(p++, desc.toUpperCase()+"%");
 			rst = executeQuery();
 			while(rst.next()){
 				lista.add(rst.getString("DESCRIPCION"));
@@ -136,7 +136,7 @@ public class ProductoService extends DbConnection{
 		try {
 			this.connect();
 			stm = prepareStatement(sql);
-			stm.setString(stmPos++, value);
+			stm.setString(p++, value);
 			rst = executeQuery();
 			while(rst.next()){
 				producto = new Producto();

@@ -1,6 +1,6 @@
 package com.multisistemas.dao.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Tabla FAC_VENTAS

@@ -1,86 +1,155 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:body>
-    <section class="content-header">
-    	<H1>Venta nueva</H1>
-    </section>
-    <h:form id="factura">
-    	<div>
-    		<p:panelGrid id="cliente">
-    			<f:facet name="header">Datos del cliente</f:facet>
-    			<p:row>
-    				<p:column>N.I.T.</p:column>
-    				<p:column>
-    					<p:inputText/>
-    				</p:column>
-    				<p:column>Fecha</p:column>
-    				<p:column>
-    					01/01/2019
-    				</p:column>
-    			</p:row>
-    			<p:row>
-    				<p:column>
-    					Nombre
-    				</p:column>
-    				<p:column colspan="3">
-    					<p:inputText/>
-    				</p:column>
-    			</p:row>
-    			<p:row>
-    				<p:column>
-    					Dirección
-    				</p:column>
-    				<p:column colspan="3">
-    					<p:inputText/>
-    				</p:column>
-    			</p:row>
-    		</p:panelGrid>
-    	</div>
-    	<div>
-    		<span>Total</span>
-    		#{ventasBean.total}
-    	</div>
-    	<p:dataTable id="detalles" value="#{ventasBean.detalleFactura}" var="detalle"
-    		rowIndexVar="position">
-    		<p:column headerText="Código">
-    			<p:autoComplete id="c" value="#{detalle.idProducto}" 
-    				completeMethod="#{ventasBean.completeCodigo}" onfocus="if(this.value==0)this.value = '';">
-    				<p:ajax event="itemSelect" listener="#{ventasBean.completeById(position)}" update="factura-detalles"
-    					oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position}-q_input');});"/>
-    			</p:autoComplete>
-    		</p:column>
-    		<p:column headerText="Descripción">
-    			<p:autoComplete value="#{detalle.descripcionProducto}" 
-    				completeMethod="#{ventasBean.completeDesc}" onfocus="this.value = '';">
-    				<p:ajax event="itemSelect" listener="#{ventasBean.completeByDesc(position)}" update="factura-detalles"
-    					oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position}-q_input');});"/>
-    			</p:autoComplete>
-    		</p:column>
-    		<p:column headerText="Cantidad">
-    			<p:inputNumber id="q" value="#{detalle.cantidad}" decimalPlaces="0" emptyValue="0" onfocus="this.value = '';">
-    				<p:ajax event="blur" listener="#{ventasBean.calcular(position)}" update="factura"
-    					oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position+1}-c_input');});"/>
-    			</p:inputNumber>
-    		</p:column>
-    		<p:column headerText="Precio unitario">
-    			<p:outputLabel value="#{detalle.precioUnitario}">
-    				<f:convertNumber pattern="#0.00"/>
-    			</p:outputLabel>
-    		</p:column>
-    		<p:column headerText="Subtotal">
-    			<p:outputLabel value="#{detalle.valor}">
-    				<f:convertNumber pattern="#0.00"/>
-    			</p:outputLabel>
-    		</p:column>
-    		<p:column>
-    			<p:commandButton icon="fa fa-fw fa-close" 
-    				actionListener="#{ventasBean.remover(position)}" update="factura"
-    				oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position}-c_input');});"/>
-    		</p:column>
-    	</p:dataTable>
-    	<p:commandButton value="Confirmar compra"/>
-    </h:form>
+	<section class="content-header">
+		<H1>Venta nueva</H1>
+	</section>
+	<h:form id="factura">
+		<div style="display:flex; margin-bottom:15px;">
+			<div class="default-form">
+				<p:panelGrid id="cliente">
+					<f:facet name="header">
+						<span class="header-span">Datos del cliente</span><br/>
+					</f:facet>
+					<p:row>
+						<p:column>
+							<p:outputLabel styleClass="outLabel">
+	    					N.I.T.
+	   					</p:outputLabel>
+						</p:column>
+						<p:column>
+							<p:inputText value="#{ventasBean.datosCliente.nit}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel styleClass="outLabel">
+		    				Fecha
+	    						</p:outputLabel>
+						</p:column>
+						<p:column>
+							<p:outputLabel value="#{ventasBean.fecha}">
+								<f:convertDateTime pattern="'Guatemala, 'dd/MM/yyyy"/>
+							</p:outputLabel>
+	   					</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:outputLabel styleClass="outLabel">
+	 		  					Nombre
+	  					</p:outputLabel>
+						</p:column>
+						<p:column>
+							<p:inputText value="#{ventasBean.datosCliente.nombre}" />
+						</p:column>
+						<p:column>
+							<p:outputLabel styleClass="outLabel">
+	 		  					Apellido
+	  					</p:outputLabel>
+						</p:column>
+						<p:column>
+							<p:inputText value="#{ventasBean.datosCliente.apellido}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:outputLabel styleClass="outLabel">
+	    					Dirección
+	    				</p:outputLabel>
+						</p:column>
+						<p:column colspan="3">
+							<p:inputText style="width:100%;" value="#{ventasBean.direccion}" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</div>
+
+			<div class="default-form display-total">
+				<div class="header-span">Total</div>
+				<p:outputLabel class="total-venta" value="#{ventasBean.total}">
+					<f:convertNumber pattern="#,###,##0.00"/>
+				</p:outputLabel>
+			</div>
+		</div>
+
+		<p:dataTable id="detalles" value="#{ventasBean.detalleFactura}"
+			var="detalle" rowIndexVar="position" styleClass="table-form fAceptar borderless">
+			<p:column headerText="Código">
+				<p:autoComplete id="c" value="#{detalle.idProducto}"
+					completeMethod="#{ventasBean.completeCodigo}"
+					onfocus="if(this.value==0)this.value = '';">
+					<p:ajax event="itemSelect"
+						listener="#{ventasBean.completeById(position)}"
+						update="factura-detalles"
+						oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position}-q_input');});" />
+				</p:autoComplete>
+			</p:column>
+			<p:column headerText="Descripción">
+				<p:autoComplete value="#{detalle.descripcionProducto}"
+					completeMethod="#{ventasBean.completeDesc}"
+					onfocus="this.value = '';">
+					<p:ajax event="itemSelect"
+						listener="#{ventasBean.completeByDesc(position)}"
+						update="factura-detalles"
+						oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position}-q_input');});" />
+				</p:autoComplete>
+			</p:column>
+			<p:column headerText="Cantidad">
+				<p:inputNumber id="q" value="#{detalle.cantidad}" decimalPlaces="0"
+					emptyValue="0" onfocus="this.value = '';">
+					<p:ajax event="blur" listener="#{ventasBean.calcular(position)}"
+						update="factura"
+						oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position+1}-c_input');});" />
+				</p:inputNumber>
+			</p:column>
+			<p:column headerText="Precio unitario" style="text-align:right;">
+				<p:outputLabel value="#{detalle.precioUnitario}">
+					<f:convertNumber pattern="#0.00" />
+				</p:outputLabel>
+			</p:column>
+			<p:column headerText="Subtotal" style="text-align:right;">
+				<p:outputLabel value="#{detalle.valor}">
+					<f:convertNumber pattern="#0.00" />
+				</p:outputLabel>
+			</p:column>
+			<p:column style="width:33px;">
+				<p:commandButton icon="fa fa-fw fa-close" styleClass="btn bEliminar"
+					actionListener="#{ventasBean.remover(position)}" update="factura"
+					oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position}-c_input');});" />
+			</p:column>
+			<f:facet name="footer">
+				<p:commandButton styleClass="btn bAceptar btnBig" value="Confirmar compra" 
+					onclick="PF('formas-pago').show();"/>			
+			</f:facet>
+		</p:dataTable>
+	</h:form>
+	
+	<p:dialog header="Formas de pago" styleClass="default-modal" widgetVar="formas-pago" modal="true" closable="true" closeOnEscape="true" appendTo="@(body)" resizable="false" draggable="false">
+		<h:form id="formasPago" styleClass="default-form" style="width:450px;margin:0px;">
+			<p:dataTable var="pago" value="#{ventasBean.pagos}" rowIndexVar="position">
+				<p:column headerText="Tipo de pago">
+					<p:selectOneMenu value="#{pago.idTiposDePago}">
+						<f:selectItem noSelectionOption="true" itemLabel="- Seleccionar -"/>
+						<f:selectItems var="tipoPago" value="#{ventasBean.tipoPagoDisp}" 
+							itemLabel="#{tipoPago.descripcion}" itemValue="#{tipoPago.idTipoDePago}"/>		
+					</p:selectOneMenu>
+				</p:column>
+				<p:column headerText="Monto">
+					<p:inputNumber value="#{pago.valor}" decimalPlaces="2"
+					emptyValue="0" onfocus="this.value = '';">
+				</p:inputNumber>
+				</p:column>
+				<p:column style="width:33px;">
+					<p:commandButton icon="fa fa-fw fa-close" styleClass="btn bEliminar"
+						actionListener="#{ventasBean.removerPago(position)}" update="formasPago"/>
+				</p:column>
+				<f:facet name="footer">
+					<p:commandButton icon="fa fa-plus" iconPos="center" styleClass="btn bEditar" style="width:100%;" actionListener="#{ventasBean.agregarTipoPago()}" update="formasPago"/>
+				</f:facet>
+			</p:dataTable>
+			<p:commandButton value="Aceptar" actionListener="#{ventasBean.completarTransaccion()}" style="float:right; margin:5px;" styleClass="btn bAceptar" oncomplete="PF('formas-pago').hide();" update="formasPago factura"/>
+		</h:form>
+	</p:dialog>
+	
 </h:body>
 </html>
