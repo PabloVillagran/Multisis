@@ -16,11 +16,13 @@
 					<p:row>
 						<p:column>
 							<p:outputLabel styleClass="outLabel">
-	    					N.I.T.
-	   					</p:outputLabel>
+	    						N.I.T.
+	   						</p:outputLabel>
 						</p:column>
 						<p:column>
-							<p:inputText value="#{ventasBean.datosCliente.nit}" />
+							<p:inputText value="#{ventasBean.datosCliente.nit}">
+								<p:ajax event="blur" listener="#{ventasBean.buscarCliente}" update="factura"/>
+							</p:inputText>
 						</p:column>
 						<p:column>
 							<p:outputLabel styleClass="outLabel">
@@ -98,7 +100,7 @@
 				<p:inputNumber id="q" value="#{detalle.cantidad}" decimalPlaces="0"
 					emptyValue="0" onfocus="this.value = '';">
 					<p:ajax event="blur" listener="#{ventasBean.calcular(position)}"
-						update="factura"
+						update="factura formasPago"
 						oncomplete="$(function(){PrimeFaces.focus('factura-detalles-#{position+1}-c_input');});" />
 				</p:inputNumber>
 			</p:column>
@@ -125,19 +127,32 @@
 	</h:form>
 	
 	<p:dialog header="Formas de pago" styleClass="default-modal" widgetVar="formas-pago" modal="true" closable="true" closeOnEscape="true" appendTo="@(body)" resizable="false" draggable="false">
-		<h:form id="formasPago" styleClass="default-form" style="width:450px;margin:0px;">
+		<h:form id="formasPago" styleClass="default-form" style="width:900px;margin:0px;">
 			<p:dataTable var="pago" value="#{ventasBean.pagos}" rowIndexVar="position">
 				<p:column headerText="Tipo de pago">
 					<p:selectOneMenu value="#{pago.idTiposDePago}">
+						<p:ajax event="change" update="formasPago"/>
 						<f:selectItem noSelectionOption="true" itemLabel="- Seleccionar -"/>
 						<f:selectItems var="tipoPago" value="#{ventasBean.tipoPagoDisp}" 
 							itemLabel="#{tipoPago.descripcion}" itemValue="#{tipoPago.idTipoDePago}"/>		
 					</p:selectOneMenu>
 				</p:column>
+				<p:column headerText="Entidad Financiera">
+					<p:selectOneMenu value="#{pago.idEntidadFinanciera}" rendered="#{pago.idTiposDePago>1}">
+						<f:selectItem noSelectionOption="true" itemLabel="-Seleccione Banco-"/>
+						<f:selectItems value="#{ventasBean.entsFinan}" var="ent" 
+							itemLabel="#{ent.nombre}" itemValue="#{ent.idEntidadFinanciera}"/>
+					</p:selectOneMenu>
+				</p:column>
+				<p:column headerText="Número">
+					<p:inputNumber onfocus="this.value = '';" value="#{pago.numero}" decimalPlaces="0"
+						 rendered="#{pago.idTiposDePago>1}" emptyValue="" thousandSeparator=""/>
+				</p:column>
 				<p:column headerText="Monto">
 					<p:inputNumber value="#{pago.valor}" decimalPlaces="2"
 					emptyValue="0" onfocus="this.value = '';">
-				</p:inputNumber>
+						<p:ajax event="blur" listener="#{ventasBean.calcularTotal}" update="formasPago"/>
+					</p:inputNumber>
 				</p:column>
 				<p:column style="width:33px;">
 					<p:commandButton icon="fa fa-fw fa-close" styleClass="btn bEliminar"
@@ -147,6 +162,16 @@
 					<p:commandButton icon="fa fa-plus" iconPos="center" styleClass="btn bEditar" style="width:100%;" actionListener="#{ventasBean.agregarTipoPago()}" update="formasPago"/>
 				</f:facet>
 			</p:dataTable>
+			<p:panelGrid columns="2" style="text-align:right;width:100%;">
+				<p:outputLabel styleClass="fPago-header" value="Total venta"/>
+				<p:outputLabel styleClass="fPago-header" value="Saldo venta"/>
+				<p:outputLabel styleClass="fPago-value" value="#{ventasBean.total}">
+					<f:convertNumber pattern="#,###,##0.00"/>
+				</p:outputLabel>
+				<p:outputLabel styleClass="fPago-value #{(ventasBean.saldo==0)?'verde':'rojo'}" value="#{ventasBean.saldo}">
+					<f:convertNumber pattern="#,###,##0.00"/>
+				</p:outputLabel>
+			</p:panelGrid>
 			<p:commandButton value="Aceptar" actionListener="#{ventasBean.completarTransaccion()}" style="float:right; margin:5px;" styleClass="btn bAceptar" oncomplete="PF('formas-pago').hide();" update="formasPago factura"/>
 		</h:form>
 	</p:dialog>

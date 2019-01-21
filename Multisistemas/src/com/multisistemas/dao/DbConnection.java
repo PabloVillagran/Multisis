@@ -31,7 +31,7 @@ public class DbConnection {
 	}
 	
 	public void closeConnection() {
-		p = 0;
+		p = 1;
 		if(this.rst!=null)try {this.rst.close();this.rst=null;}catch(Exception e) {}
 		if(this.ctm!=null)try {this.ctm.close();this.ctm=null;}catch(Exception e) {}
 		if(this.stm!=null)try {this.stm.close();this.stm=null;}catch(Exception e) {}

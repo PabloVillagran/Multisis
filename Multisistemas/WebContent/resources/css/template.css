@@ -483,3 +483,21 @@ body.menu-active div.container div.content .menu-trigger {
     background-color: #ffffff;
     border: none;
 }
+
+.fPago-header {
+    font-size: 1.2em !important;
+    font-weight: bold;
+}
+
+.fPago-value {
+    font-size: 2em !important;
+    font-weight: bold;
+}
+
+.verde{
+	color:#008d4c;
+}
+
+.rojo{
+	color:#d73925;
+}
