@@ -501,3 +501,8 @@ body.menu-active div.container div.content .menu-trigger {
 .rojo{
 	color:#d73925;
 }
+
+#loginForm{
+	width:50%;
+	margin:0 auto;
+}

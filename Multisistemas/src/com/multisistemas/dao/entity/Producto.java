@@ -29,10 +29,10 @@ public class Producto {
 	private Date fechaModifico;//	FECHA_MODIFICO	DATE
 	private long idUnidadMedida;//	ID_UNIDAD_MEDIDA	NUMBER
 	
-	public long getIdProducto() {
+	public Long getIdProducto() {
 		return idProducto;
 	}
-	public void setIdProducto(long idProducto) {
+	public void setIdProducto(Long idProducto) {
 		this.idProducto = idProducto;
 	}
 	public String getDescripcion() {

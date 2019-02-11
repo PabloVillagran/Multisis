@@ -7,6 +7,9 @@
 		<H1>Venta nueva</H1>
 	</section>
 	<h:form id="factura">
+		<p:messages closable="true" styleClass="warning-messages" showIcon="false" escape="false" showDetail="true">
+			<p:autoUpdate/>
+		</p:messages>
 		<div style="display:flex; margin-bottom:15px;">
 			<div class="default-form">
 				<p:panelGrid id="cliente">
@@ -128,6 +131,9 @@
 	
 	<p:dialog header="Formas de pago" styleClass="default-modal" widgetVar="formas-pago" modal="true" closable="true" closeOnEscape="true" appendTo="@(body)" resizable="false" draggable="false">
 		<h:form id="formasPago" styleClass="default-form" style="width:900px;margin:0px;">
+			<p:messages closable="true" styleClass="warning-messages" showIcon="false" escape="false" showDetail="true">
+				<p:autoUpdate/>
+			</p:messages>
 			<p:dataTable var="pago" value="#{ventasBean.pagos}" rowIndexVar="position">
 				<p:column headerText="Tipo de pago">
 					<p:selectOneMenu value="#{pago.idTiposDePago}">
@@ -172,7 +178,7 @@
 					<f:convertNumber pattern="#,###,##0.00"/>
 				</p:outputLabel>
 			</p:panelGrid>
-			<p:commandButton value="Aceptar" actionListener="#{ventasBean.completarTransaccion()}" style="float:right; margin:5px;" styleClass="btn bAceptar" oncomplete="PF('formas-pago').hide();" update="formasPago factura"/>
+			<p:commandButton value="Aceptar" actionListener="#{ventasBean.completarTransaccion()}" style="float:right; margin:5px;" styleClass="btn bAceptar" update="formasPago factura"/>
 		</h:form>
 	</p:dialog>
 	

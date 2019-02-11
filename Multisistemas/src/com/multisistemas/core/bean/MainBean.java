@@ -61,6 +61,11 @@ public class MainBean implements Serializable{
 		ventas.setAjax(false);
 		ventas.setCommand("#{mainBean.redirect('ventas', 'Ventas')}");
 		this.menu.addElement(ventas);
+		
+		DefaultMenuItem ajustes = new DefaultMenuItem("Ajustes");
+		ajustes.setAjax(false);
+		ajustes.setCommand("#{mainBean.redirect('ajustes', 'Ajustes')}");
+		this.menu.addElement(ajustes);
 		// TODO	
 	}
 

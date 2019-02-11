@@ -6,8 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+
+import org.primefaces.PrimeFaces;
 
 import com.multisistemas.dao.entity.Cliente;
 import com.multisistemas.dao.entity.DetallePagosVentas;
@@ -126,20 +130,26 @@ public class VentasBean implements Serializable{
 	}
 	
 	public void completarTransaccion() {
-		VentasService ventasService = new VentasService();
-		Venta venta = prepararVenta();
-		venta.setIdVenta(ventasService.insertVenta(venta));
-		DetalleVentaService detalleVentaService = new DetalleVentaService();
-		detalleVentaService.insertDetalle(detalleFactura, venta);
-		
-		DetallePagosVentaService detPagosVentaService = new DetallePagosVentaService();
-		detPagosVentaService.insertDetalle(pagos, venta);
-		limpiarDatos();
-		
-		if(!clienteExistente) {
+		if(saldo<=0) {
+			VentasService ventasService = new VentasService();
+			Venta venta = prepararVenta();
+			venta.setIdVenta(ventasService.insertVenta(venta));
+			DetalleVentaService detalleVentaService = new DetalleVentaService();
+			detalleVentaService.insertDetalle(detalleFactura, venta);
 			
-			ClienteService clienteService = new ClienteService();
-			clienteService.insertarCliente(datosCliente);
+			DetallePagosVentaService detPagosVentaService = new DetallePagosVentaService();
+			detPagosVentaService.insertDetalle(pagos, venta);
+			limpiarDatos();
+			
+			if(!clienteExistente) {
+				
+				ClienteService clienteService = new ClienteService();
+				clienteService.insertarCliente(datosCliente);
+			}
+			PrimeFaces.current().executeScript("PF('formas-pago').hide(); ");
+		}else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Saldo pendiente.", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
 	}
 	

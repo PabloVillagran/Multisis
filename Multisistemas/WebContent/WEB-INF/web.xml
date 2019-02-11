@@ -52,4 +52,17 @@
 	  <param-name>com.sun.faces.injectionProvider</param-name>
 	  <param-value>org.jboss.web.jsf.integration.injection.JBossInjectionProvider</param-value>
 	</context-param>
+	
+	<filter>
+		<filter-name>SessionFilter</filter-name>
+		<filter-class>com.multisistemas.core.filter.SessionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<url-pattern>/caja/*</url-pattern>
+	</filter-mapping>
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+	
 </web-app>
